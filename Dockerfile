@@ -1,13 +1,9 @@
-FROM node:14-alpine as build
-WORKDIR /usr/src/app
-COPY package*.json ./
+FROM node:14-alpine
+
+WORKDIR /var/www/html
+COPY package*.json /var/www/html/
 RUN npm install
-COPY . .
+COPY . /var/www/html
 RUN npm run build
 
-FROM node:14-alpine as runner
-WORKDIR /usr/src/app
-COPY package*.json ./
-COPY . .
-COPY --from=build /usr/src/app/dist ./dist
-CMD ["npm", "run start:prod"]
+CMD ["npm", "run", "start:prod"]
