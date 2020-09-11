@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  store_node:
+    container_name: store_node
+    build: ../.
+    command: >
+      sh -c "npm run start:dev"
+    ports:
+      - 3000:3000
+    environment:
+      - ENV=${ENV}
+    env_file:
+      - ${ENV}.env
+    volumes:
+      - ../src:/var/www/html/src
+      - ../test:/var/www/html/test
+    networks:
+      - public
+
+  store_db:
+    container_name: store_db
+    image: postgres:12
+    ports:
+      - 5425:5432
+    volumes:
+      - ./store_db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=store
+    networks:
+      - public
+
+  store_adminer:
+    container_name: store_adminer
+    image: adminer
+    ports:
+      - 8080:8080
+    networks:
+      - public
+
+networks:
+  public:
+    external:
+      name: public
