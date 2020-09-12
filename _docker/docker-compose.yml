@@ -17,6 +17,8 @@ services:
       - ../test:/var/www/html/test
     networks:
       - public
+    depends_on:
+      - store_db
 
   store_db:
     container_name: store_db
