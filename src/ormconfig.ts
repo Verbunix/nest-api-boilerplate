@@ -1,5 +1,4 @@
 import {ConnectionOptions} from 'typeorm';
-import * as logger from 'console';
 
 const config: ConnectionOptions = {
   type: 'postgres',
@@ -17,7 +16,5 @@ const config: ConnectionOptions = {
     migrationsDir: 'src/migrations',
   },
 };
-
-logger.log('config', config);
 
 export = config;
