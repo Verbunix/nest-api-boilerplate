@@ -1,5 +1,6 @@
 import { ConnectionOptions } from 'typeorm';
 import * as fs from 'fs';
+import { Logger } from '@nestjs/common';
 
 const config: ConnectionOptions = {
   type: 'postgres',
@@ -8,15 +9,17 @@ const config: ConnectionOptions = {
   username: process.env.DB_USER || 'postgres',
   password: process.env.DB_PASS || 'root',
   database: process.env.DB_NAME || 'store',
-  entities: [__dirname + '/**/*.entity{.ts,.js}'],
+  migrations: [__dirname + '/migrations/*{.ts,.js}'],
+  entities: [__dirname + '/entities/*.entity{.ts,.js}'],
   synchronize: false,
   migrationsRun: true,
-  logging: true,
-  migrations: [__dirname + '/migrations/**/*{.ts,.js}'],
+  logging: process.env.DB_LOGGING === 'true',
   cli: {
     migrationsDir: 'src/migrations',
   },
 };
+
+Logger.log(config);
 
 fs.writeFile('ormconfig.json', JSON.stringify({
   type: config.type,
@@ -28,7 +31,7 @@ fs.writeFile('ormconfig.json', JSON.stringify({
   entities: config.entities,
   migrations: config.migrations,
   synchronize: false,
-  logging: true,
+  logging: config.logger,
   cli: config.cli,
 }), (err) => {
   if (err) throw err;
