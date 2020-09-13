@@ -1,6 +1,5 @@
 import { ConnectionOptions } from 'typeorm';
 import * as fs from 'fs';
-import { Logger } from '@nestjs/common';
 
 const config: ConnectionOptions = {
   type: 'postgres',
@@ -19,9 +18,7 @@ const config: ConnectionOptions = {
   },
 };
 
-Logger.log(config);
-
-fs.writeFile('ormconfig.json', JSON.stringify({
+fs.writeFileSync('ormconfig.json', JSON.stringify({
   type: config.type,
   host: config.host,
   port: config.port,
@@ -33,8 +30,6 @@ fs.writeFile('ormconfig.json', JSON.stringify({
   synchronize: false,
   logging: config.logger,
   cli: config.cli,
-}), (err) => {
-  if (err) throw err;
-});
+}));
 
 export = config;

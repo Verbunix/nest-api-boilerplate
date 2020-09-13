@@ -12,21 +12,21 @@ export class Users1599995147702 implements MigrationInterface {
           isPrimary: true,
           isUnique: true,
           generationStrategy: 'uuid',
-          default: 'uuid_generate_v4()',
         },
         {
           name: 'name',
-          type: 'string',
+          type: 'varchar',
           isNullable: false,
         },
         {
           name: 'email',
-          type: 'string',
+          type: 'varchar',
           isUnique: true,
+          isNullable: false,
         },
         {
           name: 'password',
-          type: 'string',
+          type: 'varchar',
         }
       ],
     }));
