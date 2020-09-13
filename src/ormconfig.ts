@@ -1,4 +1,5 @@
-import {ConnectionOptions} from 'typeorm';
+import { ConnectionOptions } from 'typeorm';
+import * as fs from 'fs';
 
 const config: ConnectionOptions = {
   type: 'postgres',
@@ -16,5 +17,21 @@ const config: ConnectionOptions = {
     migrationsDir: 'src/migrations',
   },
 };
+
+fs.writeFile('ormconfig.json', JSON.stringify({
+  type: config.type,
+  host: config.host,
+  port: config.port,
+  username: config.username,
+  password: config.password,
+  database: config.database,
+  entities: config.entities,
+  migrations: config.migrations,
+  synchronize: false,
+  logging: true,
+  cli: config.cli,
+}), (err) => {
+  if (err) throw err;
+});
 
 export = config;
