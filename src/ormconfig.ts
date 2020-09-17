@@ -11,7 +11,7 @@ const config: ConnectionOptions = {
   migrations: [__dirname + '/migrations/*{.ts,.js}'],
   entities: [__dirname + '/entities/*.entity{.ts,.js}'],
   synchronize: false,
-  migrationsRun: true,
+  migrationsRun: false,
   logging: process.env.DB_LOGGING === 'true',
   cli: {
     migrationsDir: 'src/migrations',
