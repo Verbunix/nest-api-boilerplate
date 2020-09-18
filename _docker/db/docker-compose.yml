@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  store_db:
+    container_name: store_db
+    image: postgres:12
+    ports:
+      - 5432:5432
+    volumes:
+      - store_db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=store
+    networks:
+      - public
+
+  store_adminer:
+    container_name: store_adminer
+    image: adminer
+    ports:
+      - 8080:8080
+    networks:
+      - public
+
+networks:
+  public:
+    external:
+      name: public
+volumes:
+  store_db:
+    external: true
