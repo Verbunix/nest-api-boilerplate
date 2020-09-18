@@ -3,7 +3,7 @@ version: "3.8"
 services:
   store_node:
     container_name: store_node
-    build: ../.
+    build: ../../.
     command: >
       sh -c "npm run start:dev"
     ports:

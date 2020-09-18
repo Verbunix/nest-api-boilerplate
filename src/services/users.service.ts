@@ -8,7 +8,8 @@ export class UsersService {
   constructor(
     @InjectRepository(Users)
     private usersRepository: Repository<Users>,
-  ) { }
+  ) {
+  }
 
   async findOneById(id: string): Promise<Users | null> {
     return this.usersRepository.findOne({ where: { id } });
