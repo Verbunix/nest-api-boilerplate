@@ -5,17 +5,19 @@ import { JwtModule } from '@nestjs/jwt';
 import { UsersModule } from './users.module';
 import { LocalStrategy } from '../guards/local.strategy';
 import { AuthService } from '../services/auth.service';
+import { jwtConstants } from '../constants/jwt';
+import { JwtStrategy } from '../guards/jwt.strategy';
 
 @Module({
   imports: [
     UsersModule,
     PassportModule,
     JwtModule.register({
-      secret: process.env.JWT_SECRET || 'jwtSecret',
-      signOptions: { expiresIn: '1d' },
+      secret: jwtConstants.secret,
+      signOptions: { expiresIn: jwtConstants.expiresIn },
     }),
   ],
-  providers: [AuthService, LocalStrategy],
+  providers: [AuthService, LocalStrategy, JwtStrategy],
   controllers: [AuthController],
   exports: [AuthService],
 })
