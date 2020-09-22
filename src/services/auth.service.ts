@@ -40,10 +40,11 @@ export class AuthService {
     return user;
   }
 
-  async login(user: any) {
-    const payload = { email: user.email };
+  async login(payload: any) {
+    const user = await this.usersService.findOneByEmail(payload.email);
+
     return {
-      access_token: this.jwtService.sign(payload),
+      access_token: this.jwtService.sign({ ...user, password: undefined }),
     };
   }
 }
