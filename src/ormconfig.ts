@@ -9,7 +9,7 @@ const config: ConnectionOptions = {
   password: process.env.DB_PASS || 'root',
   database: process.env.DB_NAME || 'store',
   migrations: [__dirname + '/migrations/*{.ts,.js}'],
-  entities: [__dirname + '/entities/*.entity{.ts,.js}'],
+  entities: [__dirname + '/**/*.entity{.ts,.js}'],
   synchronize: false,
   migrationsRun: false,
   logging: process.env.DB_LOGGING === 'true',

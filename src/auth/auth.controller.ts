@@ -1,8 +1,8 @@
 import { Body, Controller, Post, UseGuards } from '@nestjs/common';
-import { SigninDto } from 'src/dtos/signin.dto';
-import { LoginDto } from '../dtos/login.dto';
-import { AuthService } from '../services/auth.service';
-import { ISigninResponse } from '../interfaces/responses/auth/signin.interface';
+import { SigninDto } from './dtos/signin.dto';
+import { LoginDto } from './dtos/login.dto';
+import { AuthService } from './auth.service';
+import { ISigninResponse } from './interfaces/signin.interface';
 import { LocalAuthGuard } from '../guards/local-auth.guard';
 
 @Controller('auth')
