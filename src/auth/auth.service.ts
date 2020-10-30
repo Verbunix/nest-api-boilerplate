@@ -32,10 +32,10 @@ export class AuthService {
 
   async validateUser(email: string, hashedPassword: string) {
     const user = await this.usersService.findOneByEmail(email);
+    if (!user) return null;
+
     const isPasswordMatching = await bcrypt.compare(hashedPassword, user.password);
-    if (!isPasswordMatching) {
-      return null;
-    }
+    if (!isPasswordMatching) return null;
 
     user.password = undefined;
     return user;
@@ -45,7 +45,7 @@ export class AuthService {
     const user = await this.usersService.findOneByEmail(payload.email);
 
     return {
-      access_token: this.jwtService.sign({ ...user, password: undefined }),
+      access_token: this.jwtService.sign({...user, password: undefined}),
     };
   }
 }
