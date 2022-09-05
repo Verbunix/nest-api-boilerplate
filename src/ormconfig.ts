@@ -10,12 +10,9 @@ const config: ConnectionOptions = {
   database: process.env.DB_NAME || 'store',
   migrations: [__dirname + '/migrations/*{.ts,.js}'],
   entities: [__dirname + '/**/*.entity{.ts,.js}'],
-  synchronize: false,
+  synchronize: process.env.DB_MIGRATIONS_SYNC === 'true',
   migrationsRun: false,
   logging: process.env.DB_LOGGING === 'true',
-  cli: {
-    migrationsDir: 'src/migrations',
-  },
 };
 
 fs.writeFileSync('ormconfig.json', JSON.stringify({
@@ -29,7 +26,6 @@ fs.writeFileSync('ormconfig.json', JSON.stringify({
   migrations: config.migrations,
   synchronize: false,
   logging: config.logger,
-  cli: config.cli,
 }));
 
 export = config;
