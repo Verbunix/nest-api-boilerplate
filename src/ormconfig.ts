@@ -1,7 +1,7 @@
-import { ConnectionOptions } from 'typeorm';
-import * as fs from 'fs';
+import 'dotenv/config';
+import { DataSource, DataSourceOptions } from 'typeorm';
 
-const config: ConnectionOptions = {
+export const dataSourceOptions: DataSourceOptions = {
   type: 'postgres',
   host: process.env.DB_HOST || '127.0.0.1',
   port: Number(process.env.DB_PORT) || 5432,
@@ -13,19 +13,7 @@ const config: ConnectionOptions = {
   synchronize: process.env.DB_MIGRATIONS_SYNC === 'true',
   migrationsRun: false,
   logging: process.env.DB_LOGGING === 'true',
+  useUTC: true,
 };
 
-fs.writeFileSync('ormconfig.json', JSON.stringify({
-  type: config.type,
-  host: config.host,
-  port: config.port,
-  username: config.username,
-  password: config.password,
-  database: config.database,
-  entities: config.entities,
-  migrations: config.migrations,
-  synchronize: false,
-  logging: config.logger,
-}));
-
-export = config;
+export const AppDataSource = new DataSource(dataSourceOptions);

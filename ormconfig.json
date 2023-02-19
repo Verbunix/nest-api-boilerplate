@@ -1,1 +1,0 @@
-{"type":"postgres","host":"127.0.0.1","port":5432,"username":"postgres","password":"root","database":"store","entities":["/Users/andrinux/github/nest-api-boilerplate/dist/**/*.entity{.ts,.js}"],"migrations":["/Users/andrinux/github/nest-api-boilerplate/dist/migrations/*{.ts,.js}"],"synchronize":false}
