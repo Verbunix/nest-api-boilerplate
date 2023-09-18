@@ -11,10 +11,10 @@ export class Users {
   @Generated('uuid')
   id: string;
 
-  @Column({ nullable: false })
+  @Column()
   name: string;
 
-  @Column({ unique: true, nullable: false })
+  @Column({ unique: true })
   email: string;
 
   @Column()

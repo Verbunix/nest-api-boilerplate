@@ -7,7 +7,7 @@ export const dataSourceOptions: DataSourceOptions = {
   port: Number(process.env.DB_PORT) || 5432,
   username: process.env.DB_USER || 'postgres',
   password: process.env.DB_PASS || 'root',
-  database: process.env.DB_NAME || 'store',
+  database: process.env.DB_NAME || 'postgres',
   migrations: [__dirname + '/migrations/*{.ts,.js}'],
   entities: [__dirname + '/**/*.entity{.ts,.js}'],
   synchronize: process.env.DB_MIGRATIONS_SYNC === 'true',

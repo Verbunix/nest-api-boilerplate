@@ -10,8 +10,7 @@ export class AuthService {
   constructor(
     private usersService: UsersService,
     private jwtService: JwtService,
-  ) {
-  }
+  ) {}
 
   async signinUser(data: SigninDto) {
     const user = await this.usersService.findOneByEmail(data.email);
@@ -38,7 +37,7 @@ export class AuthService {
     const isPasswordMatching = await bcrypt.compare(hashedPassword, user.password);
     if (!isPasswordMatching) return null;
 
-    user.password = undefined;
+    delete user.password;
     return user;
   }
 
@@ -46,7 +45,7 @@ export class AuthService {
     const user = await this.usersService.findOneByEmail(payload.email);
 
     return {
-      access_token: this.jwtService.sign({...user, password: undefined}),
+      access_token: this.jwtService.sign({ ...user, password: undefined }),
     };
   }
 }

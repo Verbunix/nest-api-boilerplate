@@ -1,4 +1,4 @@
-import { UsersRoleEnum } from '../../users/users.entity';
+import { UsersRoleEnum } from '../../enities/users.entity';
 
 export interface IJwtUser {
   id: string;

@@ -1,6 +1,5 @@
 # Project
 .env
-ormconfig.ts
 
 # compiled output
 /dist
