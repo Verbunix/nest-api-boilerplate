@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Users } from './users.entity';
+import { Users, UsersRoleEnum } from './users.entity';
 import CreateUserDto from './dtos/create-user.dto';
 
 @Injectable()
@@ -20,9 +20,14 @@ export class UsersService {
     return this.usersRepository.findOne({ where: { email } });
   }
 
-  async create(userData: CreateUserDto) {
-    const newUser = await this.usersRepository.create(userData);
-    await this.usersRepository.save(newUser);
-    return newUser;
+  async createUser(dto: CreateUserDto) {
+    const user = await this.usersRepository.create({
+      password: dto.password,
+      email: dto.email,
+      name: dto.name,
+      role: UsersRoleEnum.user,
+    } satisfies Omit<Users, 'id'>);
+    await this.usersRepository.save(user);
+    return user;
   }
 }

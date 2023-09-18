@@ -22,7 +22,7 @@ services:
 
   store_db:
     container_name: store_db
-    image: postgres:12
+    image: postgres:13
     ports:
       - 5432:5432
     volumes:
